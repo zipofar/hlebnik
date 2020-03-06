@@ -15,13 +15,30 @@
     <body>
       <div class="container">
           <div class="row">
-              <div class="col-md-12">
-                <form action="/support" method="GET">
+              <div class="col-md-12 mt-4">
+                <form action="/" method="GET">
                   <div class="form-group">
                     <input type="text" name="search" class="form-control" aria-describedby="emailHelp" placeholder="Search">
                   </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Search</button>
                 </form>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-12 mt-4">
+              @if (count($answers) > 0)
+                @foreach ($answers as $themeName => $themeAnswers)
+                  <h2>Theme: {{ $themeName }}</h2>
+                  @foreach ($themeAnswers as $answer)
+                    <h3>Symptom: {{ $answer['symptom'] }}</h3>
+                    <ul class="list-group mb-4">
+                    @foreach ($answer['solutions'] as $solution)
+                      <li class="list-group-item">{{ $solution }}</li>
+                    @endforeach
+                    </ul>
+                  @endforeach
+                @endforeach
+              @endif
               </div>
           </div>
       </div>

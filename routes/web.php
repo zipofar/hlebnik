@@ -13,8 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::resource('/support', 'SupportController', ['only' => ['index', 'show']]);
+Route::resource('/', 'SupportController', ['only' => ['index', 'show']]);
