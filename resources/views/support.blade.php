@@ -18,9 +18,16 @@
               <div class="col-md-12 mt-4">
                 <form action="/" method="GET">
                   <div class="form-group">
-                    <input type="text" name="search" class="form-control" aria-describedby="emailHelp" placeholder="Search">
+                    <input
+                      type="text"
+                      name="search"
+                      class="form-control"
+                      placeholder="Search"
+                      required
+                      value={{ $question }}
+                    >
                   </div>
-                  <button type="submit" class="btn btn-primary">Search</button>
+                  <button type="submit" class="btn btn-primary btn-block">Search</button>
                 </form>
               </div>
           </div>
