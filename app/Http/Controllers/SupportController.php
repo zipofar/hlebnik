@@ -37,7 +37,8 @@ class SupportController extends Controller
     public function index(Request $request)
     {
         $inputSearch = $request->input('search'); 
-        $rawSampleData = file_get_contents('../database/sample-data.json');
+        $pathToSampleData = join('/', [__DIR__, '..', '..', '..', 'database', 'sample-data.json' ]);
+        $rawSampleData = file_get_contents($pathToSampleData);
         $solutions = json_decode($rawSampleData, true);
         $answers = $this->findAnswer($inputSearch, $solutions);
         return view('support', ['answers' => $answers, 'question' => $inputSearch]);
