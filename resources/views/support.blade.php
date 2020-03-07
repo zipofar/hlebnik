@@ -24,7 +24,7 @@
                       class="form-control"
                       placeholder="Search"
                       required
-                      value={{ $question }}
+                      value="{{ $question }}"
                     >
                   </div>
                   <button type="submit" class="btn btn-primary btn-block">Search</button>
@@ -34,16 +34,14 @@
           <div class="row">
               <div class="col-md-12 mt-4">
               @if (count($answers) > 0)
-                @foreach ($answers as $themeName => $themeAnswers)
-                  <h2>Theme: {{ $themeName }}</h2>
-                  @foreach ($themeAnswers as $answer)
+                @foreach ($answers as $answer)
+                  <h2>Theme: {{ $answer['theme'] }}</h2>
                     <h3>Symptom: {{ $answer['symptom'] }}</h3>
                     <ul class="list-group mb-4">
                     @foreach ($answer['solutions'] as $solution)
                       <li class="list-group-item">{{ $solution }}</li>
                     @endforeach
                     </ul>
-                  @endforeach
                 @endforeach
               @endif
               </div>
