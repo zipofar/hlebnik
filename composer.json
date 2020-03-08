@@ -10,13 +10,14 @@
     "require": {
         "php": "^7.2.5",
         "ext-bcmath": "*",
-        "ext-xsl": "*",
         "ext-mbstring": "*",
+        "ext-xsl": "*",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.0",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "squizlabs/php_codesniffer": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

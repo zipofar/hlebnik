@@ -26,15 +26,15 @@ class SupportController extends Controller
 
     private function getOccurances($symptom, $questionNeedles)
     {
-        $needlesWithOccurances = array_map(function($needle) use ($symptom) {
+        $needlesWithOccurances = array_map(function ($needle) use ($symptom) {
             $countOccurance = mb_substr_count($symptom, $needle['needle']);
             $needle['countOccurance'] = $countOccurance;
             $needle['lengthOccurance'] = $countOccurance * $needle['length'];
             return $needle;
         }, $questionNeedles);
         $needlesWithSumOccurances = array_reduce($needlesWithOccurances, function ($acc, $needle) {
-            $acc['countOccurance'] += $needle['countOccurance']; 
-            $acc['lengthOccurance'] += $needle['lengthOccurance']; 
+            $acc['countOccurance'] += $needle['countOccurance'];
+            $acc['lengthOccurance'] += $needle['lengthOccurance'];
             return $acc;
         }, ['countOccurance' => 0, 'lengthOccurance' => 0]);
         return $needlesWithSumOccurances;
@@ -45,15 +45,15 @@ class SupportController extends Controller
         $themeNames = array_keys($solutions);
         $questionNeedles = $this->buildQuestion($question);
 
-        $flatSolutions = array_reduce($themeNames, function($acc, $themeName) use ($solutions) {
-            $res = array_map(function($solution) use ($themeName) {
+        $flatSolutions = array_reduce($themeNames, function ($acc, $themeName) use ($solutions) {
+            $res = array_map(function ($solution) use ($themeName) {
                 $solution['theme'] = $themeName;
                 return $solution;
             }, $solutions[$themeName]);
             return array_merge($acc, $res);
         }, []);
         
-        $solutionsWithStatsOccurance = array_map(function($themeItem) use ($questionNeedles) {
+        $solutionsWithStatsOccurance = array_map(function ($themeItem) use ($questionNeedles) {
             $symptom = $themeItem['symptom'];
             $infoOccurances = $this->getOccurances($symptom, $questionNeedles);
             return array_merge($themeItem, $infoOccurances);
@@ -64,7 +64,7 @@ class SupportController extends Controller
         });
 
         usort($filteredSolutions, function ($a, $b) {
-            if($a['countOccurance'] === $b['countOccurance']) {
+            if ($a['countOccurance'] === $b['countOccurance']) {
                 return $a['lengthOccurance'] < $b['lengthOccurance'] ? 1 : 0;
             }
             return $a['countOccurance'] < $b['countOccurance'] ? 1 : 0;
@@ -75,7 +75,7 @@ class SupportController extends Controller
 
     public function index(Request $request)
     {
-        $question = $request->input('search'); 
+        $question = $request->input('search');
         if (!$question) {
             return view('support', ['answers' => [], 'question' => $question]);
         }
